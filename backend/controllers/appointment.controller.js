@@ -19,7 +19,13 @@ module.exports.create = async (req, res) => {
 
 module.exports.getUserAppointments = async (req, res) => {
 	try {
-		const appointments = Appointment.find({ patient: req.user._id });
+		const appointments = await Appointment.find({ patient: req.user._id })
+			.populate("doctor")
+			.populate({
+				path: "patient",
+				select: "-password",
+			})
+			.exec();
 
 		res.status(200).json({ appointments });
 	} catch (err) {
