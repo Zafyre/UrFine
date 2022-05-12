@@ -15,14 +15,14 @@ const Details = (props) => {
       </div>
       <div className="row mb-5">
         <div className="col-md-6">
-          <img src={process.env.PUBLIC_URL + value.detailProduct.img} className="img-fluid" alt="product" />
+          <img src={process.env.REACT_APP_API_URI + value.detailProduct.image} className="img-fluid" alt="product" />
         </div>
         <div className="col-md-6">
-          <h2>Model: {value.detailProduct.title}</h2>
+          <h2>Name: {value.detailProduct.name}</h2>
           <h4 style={{color: '#30475e'}}>Price: <i className="fas fa-rupee-sign"></i>{value.detailProduct.price}</h4>
           <h6><b>Product Info: </b></h6>
           <p>
-            {value.detailProduct.info}
+            {value.detailProduct.description}
           </p>
           <div className="row">
             <div className="col-auto">
