@@ -9,10 +9,10 @@ const Cart = (props) => {
   const cartItems = value.cart.map((item) => {
     return (
       <CartList
-        key={item.id}
-        id={item.id}
-        img={item.img}
-        title={item.title}
+        key={item._id}
+        id={item._id}
+        img={item.image}
+        title={item.name}
         price={item.price}
         count={item.count}
       />

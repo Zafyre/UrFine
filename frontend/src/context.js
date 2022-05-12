@@ -33,7 +33,7 @@ const ProductProvider = ({ children }) => {
 	function addToCart(id) {
 		console.log(id);
 		products.forEach((item, i) => {
-			if (i === id - 1) {
+			if (item._id === id) {
 				item.inCart = true;
 				item.count = 1;
 				item.total = item.price;
@@ -47,7 +47,8 @@ const ProductProvider = ({ children }) => {
 	}
 
 	function getItem(id) {
-		const product = products.find((item) => item.id === id);
+		const product = products.find((item) => item._id === id);
+		// console.log(id, products, product);
 		return product;
 	}
 
@@ -68,7 +69,7 @@ const ProductProvider = ({ children }) => {
 
 	function increaseCount(id) {
 		cartItems.forEach((item, i) => {
-			if (item.id === id) {
+			if (item._id === id) {
 				item.count = item.count + 1;
 				item.total = item.price * item.count;
 				getTotal();
@@ -80,11 +81,11 @@ const ProductProvider = ({ children }) => {
 
 	function decreaseCount(id) {
 		cartItems.forEach((item, i) => {
-			if (item.id === id) {
+			if (item._id === id) {
 				item.count = item.count - 1;
 				item.total = item.price * item.count;
 				if (item.count === 0) {
-					removeFromCart(item.id);
+					removeFromCart(item._id);
 				}
 				getTotal();
 			}
@@ -104,7 +105,7 @@ const ProductProvider = ({ children }) => {
 		setProducts([...tempProducts]);
 
 		cartItems = cartItems.filter((item) => {
-			return item.id !== id;
+			return item._id !== id;
 		});
 		getTotal();
 		setCart(cartItems);

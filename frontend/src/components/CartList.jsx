@@ -31,7 +31,7 @@ const CartList = (props) => {
   return (
     <div className="row cartList-row" style={{textAlign: 'center'}}>
       <div className="col-2 product-img product">
-        <img className="img-fluid" src={process.env.PUBLIC_URL + props.img} alt="..."/>
+        <img className="img-fluid" src={process.env.REACT_APP_API_URI + props.img} alt="..."/>
       </div>
       <div className="col-3 product-name product">
         {props.title}

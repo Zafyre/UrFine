@@ -8,8 +8,8 @@ const ProductList = (props) => {
   const productItems = value.products.map((product) => {
     return(
       <Product
-        key={product.id}
-        id={product.id}
+        key={product._id}
+        id={product._id}
         img={product.image}
         title={product.name}
         price={product.price}
