@@ -1,8 +1,16 @@
 const mongoose = require("mongoose");
 
 const doctorSchema = mongoose.Schema({
-	name: String,
-	qualification: String,
+	name: {
+		type: String,
+		required: true,
+	},
+
+	qualification: {
+		type: String,
+		required: true,
+	},
+
 	image: String,
 });
 
