@@ -5,6 +5,7 @@ module.exports.create = async (req, res) => {
 	try {
 		const newDoctor = new Doctor({
 			...req.body,
+			image: req.file.path,
 		});
 
 		const doctor = await newDoctor.save();
