@@ -38,4 +38,36 @@ module.exports.register = async (req, res) => {
 	}
 };
 
-module.exports.login = (req, res) => {};
+module.exports.login = async (req, res) => {
+	try {
+		const user = await User.findOne({ email: req.body.email });
+
+		if (!user) {
+			res.status(404).json({ message: "User not found" });
+		} else {
+			const isPasswordMatch = await bcrypt.compare(
+				req.body.password,
+				user.password
+			);
+
+			if (!isPasswordMatch) {
+				res.status(401).json({ message: "Email / Password is incorrect" });
+			} else {
+				const token = jwt.sign(
+					{
+						_id: user._id,
+						name: user.name,
+						email: user.email,
+					},
+					process.env.JWT_SECRET,
+					{}
+				);
+
+				res.status(200).json({ user, token });
+			}
+		}
+	} catch (err) {
+		appLogger(err);
+		res.status(500).json({ message: "Something went wrong", err });
+	}
+};
