@@ -7,6 +7,10 @@ module.exports.create = async (req, res) => {
 			...req.body,
 		});
 
+		if (req.file) {
+			newProduct.image = req.file.path.substring(req.file.path.indexOf("/"));
+		}
+
 		const product = await newProduct.save();
 
 		res.status(201).json({ product });

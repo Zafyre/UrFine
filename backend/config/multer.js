@@ -5,7 +5,7 @@ module.exports.upload = (folderName) =>
 	multer({
 		storage: multer.diskStorage({
 			destination: (req, file, cb) => {
-				const path = `uploads/${folderName}`;
+				const path = `public/uploads/${folderName}`;
 				if (!fs.existsSync(path)) fs.mkdirSync(path, { recursive: true });
 				cb(null, path);
 			},

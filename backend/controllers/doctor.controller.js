@@ -5,8 +5,11 @@ module.exports.create = async (req, res) => {
 	try {
 		const newDoctor = new Doctor({
 			...req.body,
-			image: req.file.path,
 		});
+
+		if (req.file) {
+			newDoctor.image = req.file.path.substring(req.file.path.indexOf("/"));
+		}
 
 		const doctor = await newDoctor.save();
 
