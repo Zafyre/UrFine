@@ -18,7 +18,7 @@ module.exports.create = async (req, res) => {
 
 module.exports.getAll = async (req, res) => {
 	try {
-		const doctors = Doctor.find({});
+		const doctors = await Doctor.find({});
 
 		res.status(200).json({ doctors });
 	} catch (err) {
