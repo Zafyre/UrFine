@@ -5,11 +5,13 @@ const appointmentSchema = mongoose.Schema(
 		patient: {
 			type: mongoose.Types.ObjectId,
 			ref: "User",
+			required: true,
 		},
 
 		doctor: {
 			type: mongoose.Types.ObjectId,
 			ref: "Doctor",
+			required: true,
 		},
 
 		time: Date,
