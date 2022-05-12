@@ -9,20 +9,19 @@ import Cart from "./components/Cart";
 import Modal from "./components/Modal";
 
 function App() {
-  return(
-    <>
-      <Navbar />
-      <Switch>
-        <Route exact path="/watch-e-commerce/" component={Home} />
-        <Route exact path="/" component={Home} />
-        <Route exact path="/products" component={ProductList} />
-        <Route exact path="/details" component={Details} />
-        <Route path="/cart" component={Cart} />
-        <Route component={Error} />
-      </Switch>
-      <Modal />
-    </>
-  );
+	return (
+		<>
+			<Navbar />
+			<Switch>
+				<Route exact path="/" component={Home} />
+				<Route exact path="/products" component={ProductList} />
+				<Route exact path="/details" component={Details} />
+				<Route path="/cart" component={Cart} />
+				<Route component={Error} />
+			</Switch>
+			<Modal />
+		</>
+	);
 }
 
 export default App;
