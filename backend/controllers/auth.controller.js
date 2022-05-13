@@ -5,7 +5,9 @@ const appLogger = require("../utils/appLogger");
 
 module.exports.register = async (req, res) => {
 	try {
-		const user = await User.findOne({ email: req.body.email });
+		const user = await User.findOne({
+			$or: [{ email: req.body.email }, { username: req.body.username }],
+		});
 		if (!user) {
 			const salt = await bcrypt.genSalt(10);
 			const hash = await bcrypt.hash(req.body.password, salt);
@@ -14,6 +16,7 @@ module.exports.register = async (req, res) => {
 				name: req.body.name,
 				password: hash,
 				email: req.body.email,
+				username: req.body.username,
 			});
 
 			const createdUser = await newUser.save();
@@ -30,7 +33,12 @@ module.exports.register = async (req, res) => {
 
 			res.status(201).json({ user: createdUser, token });
 		} else {
-			res.status(403).json({ message: "User already exists!" });
+			res.status(403).json({
+				message:
+					user.email === req.body.email
+						? "Email already exists!"
+						: "Username already exists!",
+			});
 		}
 	} catch (err) {
 		appLogger(err);
@@ -58,6 +66,7 @@ module.exports.login = async (req, res) => {
 						_id: user._id,
 						name: user.name,
 						email: user.email,
+						username: user.username,
 					},
 					process.env.JWT_SECRET,
 					{}
