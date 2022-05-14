@@ -1,5 +1,7 @@
 import axios, { AxiosError } from "axios";
 import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
+import { order } from "../providers/order.provider";
 import { product } from "../providers/product.provider";
 import auth from "../utils/auth";
 import CartList from "./CartList";
@@ -7,6 +9,9 @@ import DetailButton from "./DetailButton";
 
 const Cart = (props) => {
 	const value = useContext(product);
+	const orderValue = useContext(order);
+
+	const history = useHistory();
 
 	const cartItems = value.cart.map((item) => {
 		return (
@@ -45,6 +50,10 @@ const Cart = (props) => {
 			// TODO : Sweet alert (Confirmed Order)
 
 			value.clearCart();
+
+			orderValue.addOrder(response.data.order);
+
+			history.replace("/products");
 		} catch (err) {
 			if (err instanceof AxiosError) {
 				// TODO : Sweet alert

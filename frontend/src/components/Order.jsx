@@ -23,13 +23,14 @@ function Order(props) {
 			<p className="order__id">
 				<small>{order._id}</small>
 			</p>
-			{content.products.map(({ product }) => (
+			{content.products.map(({ product, quantity }) => (
 				<CheckoutProduct
 					key={product._id}
 					id={product._id}
 					title={product.name}
 					image={product.image}
 					price={product.price}
+					quantity={quantity}
 				/>
 			))}
 			<CurrencyFormat
