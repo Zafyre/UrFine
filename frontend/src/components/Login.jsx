@@ -1,6 +1,8 @@
 import axios, { AxiosError } from "axios";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
+import { order } from "../providers/order.provider";
 import auth from "../utils/auth";
 
 const Container = styled.div`
@@ -70,6 +72,8 @@ const Login = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
+	const history = useHistory();
+
 	const handleClick = async (e) => {
 		e.preventDefault();
 
@@ -86,6 +90,11 @@ const Login = () => {
 
 			auth.setToken(response.data.token, true);
 			auth.setUserInfo(response.data.user, true);
+
+			const value = useContext(order);
+			value.fetchOrders();
+
+			history.replace("/");
 		} catch (err) {
 			if (err instanceof AxiosError) {
 				// TODO: Add sweet alert
