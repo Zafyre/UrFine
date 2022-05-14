@@ -6,5 +6,6 @@ const doctorController = require("../controllers/doctor.controller");
 
 router.post("/", upload("doctors").single("image"), doctorController.create);
 router.get("/", doctorController.getAll);
+router.get("/:doctorID", doctorController.getDoctorById);
 
 module.exports = router;

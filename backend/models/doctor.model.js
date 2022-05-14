@@ -11,6 +11,11 @@ const doctorSchema = mongoose.Schema({
 		required: true,
 	},
 
+	appointmentFee: {
+		type: Number,
+		required: true,
+	},
+
 	image: String,
 });
 

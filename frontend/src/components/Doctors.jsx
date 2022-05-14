@@ -3,16 +3,40 @@ import { Redirect, Link } from "react-router-dom";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import classes from "../styles/Doctors.module.css";
+import axios, { AxiosError } from "axios";
 
 const Doctors = () => {
-	useEffect(() => {}, []);
+	const [doctors, setDoctors] = useState([]);
 
-	const doctorsList = [].map((doctor) => (
-		<div key={doctor.id}>
-			<Link to={`/doctors/${doctor.id}`} className={classes.Doctors}>
+	const fetchDoctors = async () => {
+		try {
+			const response = await axios.get(
+				process.env.REACT_APP_API_URI + "/api/doctors"
+			);
+
+			console.log(response.data);
+
+			setDoctors(response.data.doctors);
+		} catch (err) {
+			if (err instanceof AxiosError) {
+				// TODO : Sweet Alert
+				console.log(err.response.data.message);
+			} else {
+				console.log(err);
+			}
+		}
+	};
+
+	useEffect(() => {
+		fetchDoctors();
+	}, []);
+
+	const doctorsList = doctors.map((doctor) => (
+		<div key={doctor._id}>
+			<Link to={`/doctors/${doctor._id}`} className={classes.Doctors}>
 				<div className="d-flex flex-column align-items-center">
 					<img
-						src={doctor.image}
+						src={process.env.REACT_APP_API_URI + doctor.image}
 						alt={doctor.name}
 						className={`rounded-circle ${classes.img}`}
 					/>
