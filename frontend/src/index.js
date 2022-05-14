@@ -6,14 +6,17 @@ import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ProductProvider } from "./providers/product.provider";
 import { DoctorProvider } from "./providers/doctor.provider";
+import { OrderProvider } from "./providers/order.provider";
 
 ReactDOM.render(
-	<DoctorProvider>
-		<ProductProvider>
-			<Router>
-				<App />
-			</Router>
-		</ProductProvider>
-	</DoctorProvider>,
+	<OrderProvider>
+		<DoctorProvider>
+			<ProductProvider>
+				<Router>
+					<App />
+				</Router>
+			</ProductProvider>
+		</DoctorProvider>
+	</OrderProvider>,
 	document.getElementById("root")
 );
