@@ -31,6 +31,7 @@ const Cart = (props) => {
 					products: value.cart.map((item) => {
 						return { product: item._id, quantity: item.count };
 					}),
+					totalPrice: value.totalAmt,
 				},
 				{
 					headers: {

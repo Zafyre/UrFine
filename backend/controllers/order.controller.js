@@ -5,6 +5,7 @@ module.exports.create = async (req, res) => {
 	try {
 		const newOrder = new Order({
 			products: req.body.products,
+			totalPrice: req.body.totalPrice,
 			user: req.user._id,
 		});
 

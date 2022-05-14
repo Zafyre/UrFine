@@ -51,7 +51,7 @@ const Navbar = (props) => {
 				{auth.getToken() && (
 					<div className="ml-auto">
 						<ul className="navbar-nav">
-							<li>
+							<li style={{ margin: "5px" }}>
 								<Link to="/appointments">
 									<button className="btn">
 										<span className="mr-2">
@@ -61,17 +61,17 @@ const Navbar = (props) => {
 									</button>
 								</Link>
 							</li>
-							<li>
+							<li style={{ margin: "5px" }}>
 								<Link to="/cart">
 									<button className="btn">
 										<span className="mr-2">
-											<i className="fas fa-cart-plus " />
+											<i className="fas fa-history " />
 										</span>
-										My Cart
+										My Orders
 									</button>
 								</Link>
 							</li>
-							<li>
+							<li style={{ margin: "5px" }}>
 								<Link to="/cart">
 									<button className="btn">
 										<span className="mr-2">
