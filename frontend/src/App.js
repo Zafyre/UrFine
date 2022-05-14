@@ -16,6 +16,8 @@ import Doctor from "./components/Doctor";
 import Appointments from "./components/Appointments";
 import NewAppointment from "./components/newAppointment/NewAppointment";
 import Appointment from "./components/Appointment";
+import Orders from "./components/Orders";
+import Order from "./components/Order";
 
 function App() {
 	return (
@@ -34,6 +36,8 @@ function App() {
 				<Route exact path="/newappointment" component={NewAppointment} />
 				<Route exact path="/appointments/:id" component={Appointment} />
 				<Route exact path="/newdoctor" component={NewDoctor} />
+				<Route exact path="/orders" component={Orders} />
+				<Route exact path="/orders/:id" component={Order} />
 				<Route path="/cart" component={Cart} />
 				<Route component={Error} />
 			</Switch>

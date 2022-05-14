@@ -62,7 +62,7 @@ const Navbar = (props) => {
 								</Link>
 							</li>
 							<li style={{ margin: "5px" }}>
-								<Link to="/cart">
+								<Link to="/orders">
 									<button className="btn">
 										<span className="mr-2">
 											<i className="fas fa-history " />
