@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import axios, { AxiosError } from "axios";
 import auth from "../utils/auth";
+import { order } from "../providers/order.provider";
+import { useHistory } from "react-router-dom";
 
 const Container = styled.div`
 	width: 100vw;
@@ -63,6 +65,8 @@ const Register = () => {
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 
+	const history = useHistory();
+
 	const handleRegister = async (e) => {
 		e.preventDefault();
 
@@ -81,6 +85,11 @@ const Register = () => {
 
 			auth.setToken(response.data.token, true);
 			auth.setUserInfo(response.data.user, true);
+
+			const value = useContext(order);
+			value.fetchOrders();
+
+			history.replace("/");
 		} catch (err) {
 			if (err instanceof AxiosError) {
 				// TODO : Add sweet alert
