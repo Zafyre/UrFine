@@ -1,18 +1,19 @@
 import axios, { AxiosError } from "axios";
 import React, { useState, useContext } from "react";
-import { product } from "../../providers/product.provider";
 import auth from "../../utils/auth";
 import "./newAppointment.css";
 import { useHistory } from "react-router-dom";
+import { appointment } from "../../providers/appointment.provider";
+import { doctor } from "../../providers/doctor.provider";
 
 export default function NewAppointment() {
 	const [inputs, setInputs] = useState({});
-	const [file, setFile] = useState(null);
+
+	const value = useContext(doctor);
+	const appointmentValue = useContext(appointment);
+	const history = useHistory();
 
 	const [selectedDoctor, setSelectedDoctor] = useState({});
-
-	const value = useContext(product);
-	const history = useHistory();
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -25,16 +26,12 @@ export default function NewAppointment() {
 		e.preventDefault();
 
 		try {
-			let data = new FormData();
-			data.append("name", "Dr. " + inputs.name);
-			data.append("qualification", inputs.qualification);
-			data.append("appointmentFee", inputs.appointmentFee);
-
-			data.append("image", file);
-
 			const response = await axios.post(
-				process.env.REACT_APP_API_URI + "/api/doctors",
-				data,
+				process.env.REACT_APP_API_URI + "/api/appointments",
+				{
+					doctor: selectedDoctor._id,
+					time: Date.parse(inputs.time),
+				},
 				{
 					headers: {
 						"x-auth-token": auth.getToken(),
@@ -44,7 +41,9 @@ export default function NewAppointment() {
 
 			console.log(response.data);
 
-			// history.replace("/doctors");
+			appointmentValue.addAppointment(response.data.appointment);
+
+			history.replace("/appointments");
 		} catch (err) {
 			if (err instanceof AxiosError) {
 				// TODO : Add sweet alert
@@ -57,24 +56,38 @@ export default function NewAppointment() {
 
 	return (
 		<div className="newProduct">
-			<h1 className="addProductTitle">New Doctor</h1>
+			<h1 className="addProductTitle">New Appointment</h1>
 			<form className="addProductForm">
 				<div className="addProductItem">
 					<label>Doctor</label>
 					<select
 						name="doctor"
 						placeholder="--Select Doctor--"
-						value={selectedDoctor.name || "--Select Doctor--"}
-						onChange={handleChange}
+						value={selectedDoctor._id || ""}
+						onChange={(e) => {
+							e.preventDefault();
+							console.log(e.target.value);
+							const doc = value.getDoctor(e.target.value);
+							setSelectedDoctor(doc);
+						}}
 					>
-						<option>Hello World</option>
+						<option value="" disabled hidden>
+							--Select Doctor--
+						</option>
+						{value.doctors.map((doctor) => {
+							return (
+								<option key={doctor._id} value={doctor._id}>
+									{doctor.name}
+								</option>
+							);
+						})}
 					</select>
 				</div>
 				<div className="addProductItem">
-					<label>Qualification</label>
+					<label>Appointment Time</label>
 					<input
-						name="qualification"
-						type="text"
+						name="time"
+						type="datetime-local"
 						placeholder="description..."
 						onChange={handleChange}
 					/>
@@ -84,8 +97,8 @@ export default function NewAppointment() {
 					<input
 						name="appointmentFee"
 						type="number"
-						placeholder="300"
-						onChange={handleChange}
+						placeholder={selectedDoctor.appointmentFee}
+						disabled
 					/>
 				</div>
 				<button onClick={handleClick} className="addProductButton">

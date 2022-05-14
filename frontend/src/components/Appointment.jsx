@@ -1,52 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Redirect, useParams, Link } from "react-router-dom";
+import { appointment } from "../providers/appointment.provider";
 
 const Appointment = () => {
-	const [content, setContent] = useState({});
-	const [doctor, setDoctor] = useState({});
-	const [loading, setLoading] = useState(true);
-	const [successful, setSuccessful] = useState(false);
-	const [error, setError] = useState(false);
-
 	const { id } = useParams();
-	useEffect(() => {}, []);
 
-	const handleClick = () => {};
-
-	if (successful) {
-		return <Redirect to="/appointments" />;
-	}
+	const value = useContext(appointment);
+	const content = value.getAppointment(id);
 
 	return (
 		<div className="container">
-			<header className="jumbotron">
-				{loading && <span className="spinner-border spinner-border-lg" />}
-				{doctor && (
-					<div>
-						<p>
-							Appointment Id: &nbsp;
-							{content.id}
-						</p>
-						<p>
-							With &nbsp;
-							<Link to={`/doctors/${doctor.id}`}>{doctor.name}</Link>
-						</p>
-						<p>
-							On &nbsp;
-							{new Date(content.appointment_date).toUTCString()}
-						</p>
-						<button
-							className="btn btn-primary btn-block"
-							type="button"
-							onClick={handleClick}
-							disabled={loading}
-						>
-							Delete
-						</button>
-					</div>
-				)}
-				{error && <p>{content}</p>}
-			</header>
+			<div>
+				<p>
+					Appointment Id: &nbsp;
+					{content._id}
+				</p>
+				<p>
+					With &nbsp;
+					<Link to={`/doctors/${content.doctor._id}`}>
+						{content.doctor.name}
+					</Link>
+				</p>
+				<p>
+					On &nbsp;
+					{new Date(content.time).toUTCString()}
+				</p>
+			</div>
 		</div>
 	);
 };

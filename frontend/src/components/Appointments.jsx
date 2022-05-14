@@ -1,29 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Redirect, Link } from "react-router-dom";
+import { appointment } from "../providers/appointment.provider";
 
 const Appointments = () => {
-	const [content, setContent] = useState([]);
-	const [loading, setLoading] = useState(true);
-
 	let appointments;
 
-	useEffect(() => {}, []);
+	const value = useContext(appointment);
+	const content = value.appointments;
 
 	if (content.length === 0) {
 		appointments = (
 			<h4>
 				You do not have any appointment. Create one
-				<Link to="/appointments/new">here</Link>
+				<Link to="/newappointment"> here</Link>
 			</h4>
 		);
 	} else {
 		appointments =
 			content &&
 			content.map((appointment) => {
-				const d = new Date(appointment.appointment_date);
+				const d = new Date(appointment.time);
 				const date = d.toUTCString();
 				return (
-					<Link to={`/appointments/${appointment.id}`} key={appointment.id}>
+					<Link to={`/appointments/${appointment._id}`} key={appointment._id}>
 						<div className="card m-4">
 							<div className="card-body">
 								<p>
@@ -40,7 +39,6 @@ const Appointments = () => {
 	return (
 		<div className="container text-center">
 			<h3>Appointments</h3>
-			{loading && <span className="spinner-border spinner-border-lg" />}
 			<div className="d-flex flex-wrap">{appointments}</div>
 		</div>
 	);

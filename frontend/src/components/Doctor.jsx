@@ -35,7 +35,7 @@ const Doctor = () => {
 					<li>
 						<Link
 							to={{
-								pathname: "/appointments/new",
+								pathname: "/newappointment",
 								doctorId: content.id,
 							}}
 							className={classes.btn}
