@@ -11,7 +11,11 @@ module.exports.create = async (req, res) => {
 
 		const order = await newOrder.save();
 
-		res.status(201).json({ order });
+		const populatedOrder = await Order.populate(order, {
+			path: "products.product",
+		});
+
+		res.status(201).json({ order: populatedOrder });
 	} catch (err) {
 		appLogger(err);
 		res.status(500).json({ message: "Something went wrong", err });
@@ -21,6 +25,7 @@ module.exports.create = async (req, res) => {
 module.exports.getUserOrders = async (req, res) => {
 	try {
 		const orders = await Order.find({ user: req.user._id })
+			.sort({ createdAt: -1 })
 			.populate("products.product")
 			.exec();
 

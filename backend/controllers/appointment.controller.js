@@ -10,7 +10,11 @@ module.exports.create = async (req, res) => {
 
 		const appointment = await newAppointment.save();
 
-		res.status(201).json({ appointment });
+		const populatedAppointment = await Appointment.populate(appointment, {
+			path: "doctor",
+		});
+
+		res.status(201).json({ appointment: populatedAppointment });
 	} catch (err) {
 		appLogger(err);
 		res.status(500).json({ message: "Something went wrong", err });
