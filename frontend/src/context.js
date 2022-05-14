@@ -121,6 +121,12 @@ const ProductProvider = ({ children }) => {
 
 	function clearCart() {
 		cartItems = [];
+		setProducts((prevState) => {
+			const newProducts = prevState.map((item) => {
+				return { ...item, inCart: false, count: 0, total: 0 };
+			});
+			return newProducts;
+		});
 		setCart(cartItems);
 		getTotal();
 	}
