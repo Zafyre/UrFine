@@ -2,10 +2,10 @@ import axios, { AxiosError } from "axios";
 import React, { useState, useContext } from "react";
 import { product } from "../../context";
 import auth from "../../utils/auth";
-import "./newProduct.css";
+import "./newDoctor.css";
 import { useHistory } from "react-router-dom";
 
-export default function NewProduct() {
+export default function NewDoctor() {
 	const [inputs, setInputs] = useState({});
 	const [file, setFile] = useState(null);
 
@@ -25,13 +25,12 @@ export default function NewProduct() {
 		try {
 			let data = new FormData();
 			data.append("name", inputs.name);
-			data.append("description", inputs.description);
-			data.append("price", inputs.price);
+			data.append("qualification", inputs.qualification);
 
 			data.append("image", file);
 
 			const response = await axios.post(
-				process.env.REACT_APP_API_URI + "/api/products",
+				process.env.REACT_APP_API_URI + "/api/doctors",
 				data,
 				{
 					headers: {
@@ -42,9 +41,7 @@ export default function NewProduct() {
 
 			console.log(response.data);
 
-			value.fetchProducts();
-
-			history.replace("/products");
+			// history.replace("/doctors");
 		} catch (err) {
 			if (err instanceof AxiosError) {
 				// TODO : Add sweet alert
@@ -57,7 +54,7 @@ export default function NewProduct() {
 
 	return (
 		<div className="newProduct">
-			<h1 className="addProductTitle">New Product</h1>
+			<h1 className="addProductTitle">New Doctor</h1>
 			<form className="addProductForm">
 				<div className="addProductItem">
 					<label>Image</label>
@@ -77,20 +74,11 @@ export default function NewProduct() {
 					/>
 				</div>
 				<div className="addProductItem">
-					<label>Description</label>
+					<label>Qualification</label>
 					<input
-						name="description"
+						name="qualification"
 						type="text"
 						placeholder="description..."
-						onChange={handleChange}
-					/>
-				</div>
-				<div className="addProductItem">
-					<label>Price</label>
-					<input
-						name="price"
-						type="number"
-						placeholder="100"
 						onChange={handleChange}
 					/>
 				</div>
