@@ -1,15 +1,15 @@
 import axios, { AxiosError } from "axios";
 import React, { useState, useContext } from "react";
-import { product } from "../../providers/product.provider";
 import auth from "../../utils/auth";
 import "./newDoctor.css";
 import { useHistory } from "react-router-dom";
+import { doctor } from "../../providers/doctor.provider";
 
 export default function NewDoctor() {
 	const [inputs, setInputs] = useState({});
 	const [file, setFile] = useState(null);
 
-	const value = useContext(product);
+	const value = useContext(doctor);
 	const history = useHistory();
 
 	const handleChange = (e) => {
@@ -42,7 +42,9 @@ export default function NewDoctor() {
 
 			console.log(response.data);
 
-			// history.replace("/doctors");
+			value.addDoctor(response.data.doctor);
+
+			history.replace("/doctors");
 		} catch (err) {
 			if (err instanceof AxiosError) {
 				// TODO : Add sweet alert

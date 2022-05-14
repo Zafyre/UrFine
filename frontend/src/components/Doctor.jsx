@@ -1,35 +1,14 @@
 import axios, { AxiosError } from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Redirect, Link, useParams } from "react-router-dom";
+import { doctor } from "../providers/doctor.provider";
 import classes from "../styles/Doctor.module.css";
 
 const Doctor = () => {
 	const { id } = useParams();
 
-	const [content, setContent] = useState({});
-
-	const fetchDoctor = async () => {
-		try {
-			const response = await axios.get(
-				process.env.REACT_APP_API_URI + `/api/doctors/${id}`
-			);
-
-			console.log(response.data);
-
-			setContent(response.data.doctor);
-		} catch (err) {
-			if (err instanceof AxiosError) {
-				// TODO : Sweet Alert
-				console.log(err.response.data.message);
-			} else {
-				console.log(err);
-			}
-		}
-	};
-
-	useEffect(() => {
-		fetchDoctor();
-	}, []);
+	const value = useContext(doctor);
+	const content = value.getDoctor(id);
 
 	return (
 		<div className="container">
