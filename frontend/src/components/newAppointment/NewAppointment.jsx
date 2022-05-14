@@ -2,12 +2,14 @@ import axios, { AxiosError } from "axios";
 import React, { useState, useContext } from "react";
 import { product } from "../../providers/product.provider";
 import auth from "../../utils/auth";
-import "./newProduct.css";
+import "./newAppointment.css";
 import { useHistory } from "react-router-dom";
 
-export default function NewProduct() {
+export default function NewAppointment() {
 	const [inputs, setInputs] = useState({});
 	const [file, setFile] = useState(null);
+
+	const [selectedDoctor, setSelectedDoctor] = useState({});
 
 	const value = useContext(product);
 	const history = useHistory();
@@ -24,14 +26,14 @@ export default function NewProduct() {
 
 		try {
 			let data = new FormData();
-			data.append("name", inputs.name);
-			data.append("description", inputs.description);
-			data.append("price", inputs.price);
+			data.append("name", "Dr. " + inputs.name);
+			data.append("qualification", inputs.qualification);
+			data.append("appointmentFee", inputs.appointmentFee);
 
 			data.append("image", file);
 
 			const response = await axios.post(
-				process.env.REACT_APP_API_URI + "/api/products",
+				process.env.REACT_APP_API_URI + "/api/doctors",
 				data,
 				{
 					headers: {
@@ -42,9 +44,7 @@ export default function NewProduct() {
 
 			console.log(response.data);
 
-			value.fetchProducts();
-
-			history.replace("/products");
+			// history.replace("/doctors");
 		} catch (err) {
 			if (err instanceof AxiosError) {
 				// TODO : Add sweet alert
@@ -57,40 +57,34 @@ export default function NewProduct() {
 
 	return (
 		<div className="newProduct">
-			<h1 className="addProductTitle">New Product</h1>
+			<h1 className="addProductTitle">New Doctor</h1>
 			<form className="addProductForm">
 				<div className="addProductItem">
-					<label>Image</label>
-					<input
-						type="file"
-						id="file"
-						onChange={(e) => setFile(e.target.files[0])}
-					/>
-				</div>
-				<div className="addProductItem">
-					<label>Name</label>
-					<input
-						name="name"
-						type="text"
-						placeholder="Apple Airpods"
+					<label>Doctor</label>
+					<select
+						name="doctor"
+						placeholder="--Select Doctor--"
+						value={selectedDoctor.name || "--Select Doctor--"}
 						onChange={handleChange}
-					/>
+					>
+						<option>Hello World</option>
+					</select>
 				</div>
 				<div className="addProductItem">
-					<label>Description</label>
+					<label>Qualification</label>
 					<input
-						name="description"
+						name="qualification"
 						type="text"
 						placeholder="description..."
 						onChange={handleChange}
 					/>
 				</div>
 				<div className="addProductItem">
-					<label>Price</label>
+					<label>Appointment Fee</label>
 					<input
-						name="price"
+						name="appointmentFee"
 						type="number"
-						placeholder="100"
+						placeholder="300"
 						onChange={handleChange}
 					/>
 				</div>

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Product from "./Product";
 // import {storeProducts} from "../data";
-import { product } from "../context";
+import { product } from "../providers/product.provider";
 import DetailButton from "./DetailButton";
 import { Link } from "react-router-dom";
 

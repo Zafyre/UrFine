@@ -13,6 +13,9 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Doctors from "./components/Doctors";
 import Doctor from "./components/Doctor";
+import Appointments from "./components/Appointments";
+import NewAppointment from "./components/newAppointment/NewAppointment";
+import Appointment from "./components/Appointment";
 
 function App() {
 	return (
@@ -27,6 +30,9 @@ function App() {
 				<Route exact path="/doctors" component={Doctors} />
 				<Route exact path="/doctors/:id" component={Doctor} />
 				<Route exact path="/newproduct" component={NewProduct} />
+				<Route exact path="/appointments" component={Appointments} />
+				<Route exact path="/newappointment" component={NewAppointment} />
+				<Route exact path="/appointments/:id" component={Appointment} />
 				<Route exact path="/newdoctor" component={NewDoctor} />
 				<Route path="/cart" component={Cart} />
 				<Route component={Error} />

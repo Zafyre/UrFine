@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios";
 import React, { useContext } from "react";
-import { product } from "../context";
+import { product } from "../providers/product.provider";
 import auth from "../utils/auth";
 import CartList from "./CartList";
 import DetailButton from "./DetailButton";

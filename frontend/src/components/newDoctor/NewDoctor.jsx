@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios";
 import React, { useState, useContext } from "react";
-import { product } from "../../context";
+import { product } from "../../providers/product.provider";
 import auth from "../../utils/auth";
 import "./newDoctor.css";
 import { useHistory } from "react-router-dom";
