@@ -73,6 +73,7 @@ const Login = () => {
 	const [password, setPassword] = useState("");
 
 	const history = useHistory();
+	const value = useContext(order);
 
 	const handleClick = async (e) => {
 		e.preventDefault();
@@ -91,7 +92,6 @@ const Login = () => {
 			auth.setToken(response.data.token, true);
 			auth.setUserInfo(response.data.user, true);
 
-			const value = useContext(order);
 			value.fetchOrders();
 
 			history.replace("/");

@@ -66,6 +66,7 @@ const Register = () => {
 	const [confirmPassword, setConfirmPassword] = useState("");
 
 	const history = useHistory();
+	const value = useContext(order);
 
 	const handleRegister = async (e) => {
 		e.preventDefault();
@@ -86,7 +87,6 @@ const Register = () => {
 			auth.setToken(response.data.token, true);
 			auth.setUserInfo(response.data.user, true);
 
-			const value = useContext(order);
 			value.fetchOrders();
 
 			history.replace("/");
