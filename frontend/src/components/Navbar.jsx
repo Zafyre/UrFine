@@ -32,6 +32,11 @@ const Navbar = (props) => {
 							Our Products
 						</Link>
 					</li>
+					<li className="nav-item">
+						<Link to="/doctors" className="nav-link">
+							Our Doctors
+						</Link>
+					</li>
 				</ul>
 				{auth.getToken() !== null || (
 					<Link to="/register" className="ml-auto">

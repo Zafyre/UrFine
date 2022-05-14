@@ -30,3 +30,19 @@ module.exports.getAll = async (req, res) => {
 		res.status(500).json({ message: "Something went wrong", err });
 	}
 };
+
+module.exports.getDoctorById = async (req, res) => {
+	try {
+		const { doctorID } = req.params;
+		const doctor = await Doctor.findById(doctorID);
+
+		if (!doctor) {
+			res.status(404).json({ message: "Doctor not found!" });
+		} else {
+			res.status(200).json({ doctor });
+		}
+	} catch (err) {
+		appLogger(err);
+		res.status(500).json({ message: "Something went wrong", err });
+	}
+};

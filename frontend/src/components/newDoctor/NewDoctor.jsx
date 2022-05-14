@@ -24,8 +24,9 @@ export default function NewDoctor() {
 
 		try {
 			let data = new FormData();
-			data.append("name", inputs.name);
+			data.append("name", "Dr. " + inputs.name);
 			data.append("qualification", inputs.qualification);
+			data.append("appointmentFee", inputs.appointmentFee);
 
 			data.append("image", file);
 
@@ -79,6 +80,15 @@ export default function NewDoctor() {
 						name="qualification"
 						type="text"
 						placeholder="description..."
+						onChange={handleChange}
+					/>
+				</div>
+				<div className="addProductItem">
+					<label>Appointment Fee</label>
+					<input
+						name="appointmentFee"
+						type="number"
+						placeholder="300"
 						onChange={handleChange}
 					/>
 				</div>
