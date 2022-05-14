@@ -149,6 +149,7 @@ const ProductProvider = ({ children }) => {
 				decreaseCount,
 				removeFromCart,
 				clearCart,
+				fetchProducts,
 			}}
 		>
 			{children}
