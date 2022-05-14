@@ -8,7 +8,7 @@ module.exports.create = async (req, res) => {
 			user: req.user._id,
 		});
 
-		const order = newOrder.save();
+		const order = await newOrder.save();
 
 		res.status(201).json({ order });
 	} catch (err) {
@@ -20,7 +20,7 @@ module.exports.create = async (req, res) => {
 module.exports.getUserOrders = async (req, res) => {
 	try {
 		const orders = await Order.find({ user: req.user._id })
-			.populate("products")
+			.populate("products.product")
 			.exec();
 
 		res.status(200).json({ orders });
