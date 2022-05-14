@@ -11,6 +11,7 @@ import NewProduct from "./components/newProduct/NewProduct";
 import NewDoctor from "./components/newDoctor/NewDoctor";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import Doctors from "./components/Doctors";
 
 function App() {
 	return (
@@ -22,6 +23,7 @@ function App() {
 				<Route exact path="/register" component={Register} />
 				<Route exact path="/products" component={ProductList} />
 				<Route exact path="/details" component={Details} />
+				<Route exact path="/doctors" component={Doctors} />
 				<Route exact path="/newproduct" component={NewProduct} />
 				<Route exact path="/newdoctor" component={NewDoctor} />
 				<Route path="/cart" component={Cart} />
