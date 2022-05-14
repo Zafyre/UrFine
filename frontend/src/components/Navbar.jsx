@@ -49,14 +49,40 @@ const Navbar = (props) => {
 					</Link>
 				)}
 				{auth.getToken() && (
-					<Link to="/cart" className="ml-auto">
-						<button className="btn">
-							<span className="mr-2">
-								<i className="fas fa-cart-plus " />
-							</span>
-							My Cart
-						</button>
-					</Link>
+					<div className="ml-auto">
+						<ul className="navbar-nav">
+							<li>
+								<Link to="/appointments">
+									<button className="btn">
+										<span className="mr-2">
+											<i className="fas fa-calendar " />
+										</span>
+										My Appointments
+									</button>
+								</Link>
+							</li>
+							<li>
+								<Link to="/cart">
+									<button className="btn">
+										<span className="mr-2">
+											<i className="fas fa-cart-plus " />
+										</span>
+										My Cart
+									</button>
+								</Link>
+							</li>
+							<li>
+								<Link to="/cart">
+									<button className="btn">
+										<span className="mr-2">
+											<i className="fas fa-cart-plus " />
+										</span>
+										My Cart
+									</button>
+								</Link>
+							</li>
+						</ul>
+					</div>
 				)}
 			</div>
 		</nav>
