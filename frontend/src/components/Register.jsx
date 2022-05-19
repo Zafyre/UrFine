@@ -4,6 +4,7 @@ import axios, { AxiosError } from "axios";
 import auth from "../utils/auth";
 import { order } from "../providers/order.provider";
 import { useHistory } from "react-router-dom";
+import { showToast } from "../utils/toasts";
 
 const Container = styled.div`
 	width: 100vw;
@@ -12,7 +13,7 @@ const Container = styled.div`
 			rgba(255, 255, 255, 0.5),
 			rgba(255, 255, 255, 0.5)
 		),
-		url("https://images.pexels.com/photos/6984661/pexels-photo-6984661.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
+		url("https://cache.desktopnexus.com/thumbseg/1270/1270589-bigthumbnail.jpg")
 			center;
 	background-size: cover;
 	display: flex;
@@ -70,6 +71,24 @@ const Register = () => {
 
 	const handleRegister = async (e) => {
 		e.preventDefault();
+		if( firstName==="" || lastName==="" || username==="" || email==="" || password==="" || confirmPassword===""){
+			await showToast(
+				"pls fill all the details",
+				"error",
+
+			)
+			return;
+		}
+		if(confirmPassword!==password){
+			await showToast(
+				"passwords dont match",
+				"error"
+			)
+			return;
+
+		}
+
+
 
 		try {
 			const response = await axios.post(
@@ -92,7 +111,10 @@ const Register = () => {
 			history.replace("/");
 		} catch (err) {
 			if (err instanceof AxiosError) {
-				// TODO : Add sweet alert
+				showToast(
+					err.response.data.message,
+					"error"
+				)
 				console.log(err.response.data.message);
 			} else {
 				console.log(err);
@@ -131,12 +153,14 @@ const Register = () => {
 					/>
 					<Input
 						placeholder="password"
+						type="password"
 						onChange={(event) => {
 							setPassword(event.target.value);
 						}}
 					/>
 					<Input
 						placeholder="confirm password"
+						type="password"
 						onChange={(event) => {
 							setConfirmPassword(event.target.value);
 						}}

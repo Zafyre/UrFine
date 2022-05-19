@@ -10,13 +10,15 @@
     "components": "^0.1.0",
     "moment": "^2.29.3",
     "react": "^16.13.1",
+    "react-bootstrap-sweetalert": "^5.2.0",
     "react-currency-format": "^1.1.0",
     "react-dom": "^16.13.1",
     "react-multi-carousel": "^2.8.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^5.0.1",
     "styled": "^1.0.0",
-    "styled-components": "^5.3.5"
+    "styled-components": "^5.3.5",
+    "sweetalert2": "^11.4.14"
   },
   "scripts": {
     "start": "react-scripts start",
