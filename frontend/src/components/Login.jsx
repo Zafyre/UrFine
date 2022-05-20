@@ -65,11 +65,9 @@ const Link = styled.a`
   text-decoration: underline;
   cursor: pointer;
 `;
-
 const Error = styled.span`
   color: red;
 `;
-
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

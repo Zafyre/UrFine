@@ -48,7 +48,7 @@ export default function NewAppointment() {
       history.replace("/appointments");
     } catch (err) {
       if (err instanceof AxiosError) {
-        // TODO : Add sweet alert
+        showToast("pls fill all the details", "error");
         console.log(err.response.data.message);
       } else {
         console.log(err);
