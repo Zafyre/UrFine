@@ -41,20 +41,16 @@ const Details = (props) => {
 						</div>
 						<div
 							className="col-auto"
-							onClick={() => {
-								value.addToCart(value.detailProduct.id);
-								value.openModal(value.detailProduct.id);
+							onClick={(e) => {
+								e.preventDefault();
+								value.addToCart(value.detailProduct._id);
 							}}
 						>
-							<Link to="/details">
-								<DetailButton
-									btnTxt={
-										value.detailProduct.inCart ? "In Cart" : "Add to Cart"
-									}
-									disabled={value.detailProduct.inCart ? true : false}
-									btnClass="btn-outline-warning detailBtn"
-								/>
-							</Link>
+							<DetailButton
+								btnTxt={value.detailProduct.inCart ? "In Cart" : "Add to Cart"}
+								disabled={value.detailProduct.inCart ? true : false}
+								btnClass="btn-outline-warning detailBtn"
+							/>
 						</div>
 					</div>
 				</div>
