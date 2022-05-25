@@ -13,7 +13,7 @@ const Appointments = () => {
       <h4>
         You do not have any appointment.
         <li style={{ margin: "5px" }}>
-          <Link to="/cart">
+          <Link to="/newAppointment">
             <button className="btn">
               <span className="mr-2">
                 <i className="fas fa-calender" />

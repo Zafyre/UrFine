@@ -57,7 +57,6 @@ const Cart = (props) => {
       history.replace("/products");
     } catch (err) {
       if (err instanceof AxiosError) {
-        // TODO : Sweet alert
         console.log(err.response.data.message);
       } else {
         console.log(err);

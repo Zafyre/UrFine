@@ -48,7 +48,7 @@ export default function NewProduct() {
       history.replace("/products");
     } catch (err) {
       if (err instanceof AxiosError) {
-        showToast("pls fill all the details", "error");
+        showToast("Pls fill all the details", "error");
         console.log(err.response.data.message);
       } else {
         console.log(err);
