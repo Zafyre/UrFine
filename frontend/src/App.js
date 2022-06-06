@@ -20,34 +20,40 @@ import Orders from "./components/Orders";
 import Order from "./components/Order";
 import StripeContainer from "./components/StripeContainer";
 import Paymentform from "./components/Paymentform";
+import PetDetails from "./components/PetDetails";
+import PetList from "./components/PetList";
+import NewPet from "./components/newPet/NewPet";
 
 function App() {
-  return (
-    <>
-      <Navbar />
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/register" component={Register} />
-        <Route exact path="/products" component={ProductList} />
-        <Route exact path="/details" component={Details} />
-        <Route exact path="/doctors" component={Doctors} />
-        <Route exact path="/doctors/:id" component={Doctor} />
-        <Route exact path="/newproduct" component={NewProduct} />
-        <Route exact path="/appointments" component={Appointments} />
-        <Route exact path="/newappointment" component={NewAppointment} />
-        <Route exact path="/appointments/:id" component={Appointment} />
-        <Route exact path="/newdoctor" component={NewDoctor} />
-        <Route exact path="/orders" component={Orders} />
-        <Route exact path="/orders/:id" component={Order} />
-        <Route path="/cart" component={Cart} />
-        <Route path="/stripecontainer" component={StripeContainer} />
-        <Route path="/paymentform" component={Paymentform} />
-        <Route component={Error} />
-      </Switch>
-      <Modal />
-    </>
-  );
+	return (
+		<>
+			<Navbar />
+			<Switch>
+				<Route exact path="/" component={Home} />
+				<Route exact path="/login" component={Login} />
+				<Route exact path="/register" component={Register} />
+				<Route exact path="/products" component={ProductList} />
+				<Route exact path="/pets" component={PetList} />
+				<Route exact path="/details" component={Details} />
+				<Route exact path="/pet-details" component={PetDetails} />
+				<Route exact path="/doctors" component={Doctors} />
+				<Route exact path="/doctors/:id" component={Doctor} />
+				<Route exact path="/newproduct" component={NewProduct} />
+				<Route exact path="/newpet" component={NewPet} />
+				<Route exact path="/appointments" component={Appointments} />
+				<Route exact path="/newappointment" component={NewAppointment} />
+				<Route exact path="/appointments/:id" component={Appointment} />
+				<Route exact path="/newdoctor" component={NewDoctor} />
+				<Route exact path="/orders" component={Orders} />
+				<Route exact path="/orders/:id" component={Order} />
+				<Route path="/cart" component={Cart} />
+				<Route path="/stripecontainer" component={StripeContainer} />
+				<Route path="/paymentform" component={Paymentform} />
+				<Route component={Error} />
+			</Switch>
+			<Modal />
+		</>
+	);
 }
 
 export default App;

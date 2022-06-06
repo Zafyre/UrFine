@@ -8,18 +8,21 @@ import { ProductProvider } from "./providers/product.provider";
 import { DoctorProvider } from "./providers/doctor.provider";
 import { OrderProvider } from "./providers/order.provider";
 import { AppointmentProvider } from "./providers/appointment.provider";
+import { PetProvider } from "./providers/pet.provider";
 
 ReactDOM.render(
-	<AppointmentProvider>
-		<OrderProvider>
-			<DoctorProvider>
-				<ProductProvider>
-					<Router>
-						<App />
-					</Router>
-				</ProductProvider>
-			</DoctorProvider>
-		</OrderProvider>
-	</AppointmentProvider>,
+	<PetProvider>
+		<AppointmentProvider>
+			<OrderProvider>
+				<DoctorProvider>
+					<ProductProvider>
+						<Router>
+							<App />
+						</Router>
+					</ProductProvider>
+				</DoctorProvider>
+			</OrderProvider>
+		</AppointmentProvider>
+	</PetProvider>,
 	document.getElementById("root")
 );

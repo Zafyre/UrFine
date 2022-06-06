@@ -9,14 +9,26 @@ import { showToast } from "../utils/toasts";
 import CartList from "./CartList";
 import DetailButton from "./DetailButton";
 import StripeCheckout from "react-stripe-checkout";
+import { pet } from "../providers/pet.provider";
 
 const Cart = (props) => {
 	const value = useContext(product);
-	const orderValue = useContext(order);
-
-	const history = useHistory();
+	const petValue = useContext(pet);
 
 	const cartItems = value.cart.map((item) => {
+		return (
+			<CartList
+				key={item._id}
+				id={item._id}
+				img={item.image}
+				title={item.name}
+				price={item.price}
+				count={item.count}
+			/>
+		);
+	});
+
+	const cartItems2 = petValue.cart.map((item) => {
 		return (
 			<CartList
 				key={item._id}
@@ -37,7 +49,7 @@ const Cart = (props) => {
 		font-weight: 600;
 	`;
 
-	if (value.cart.length === 0) {
+	if (value.cart.length === 0 && petValue.cart.length === 0) {
 		return (
 			<div className="container">
 				<div className="main-heading-container">
@@ -71,9 +83,11 @@ const Cart = (props) => {
 							<b>Item Total</b>
 						</div>
 					</div>
-
+					<h3>Products</h3>
 					{cartItems}
 
+					<h3>Pets</h3>
+					{cartItems2}
 					<div
 						className="row"
 						style={{
@@ -133,7 +147,11 @@ const Cart = (props) => {
 						</div>
 					</div>
 
+					<h3>Products</h3>
 					{cartItems}
+
+					<h3>Pets</h3>
+					{cartItems2}
 
 					<br />
 
@@ -166,7 +184,7 @@ const Cart = (props) => {
 
 							<h4 style={{ display: "inline-block", margin: "auto 10px" }}>
 								<b>Total: </b> <i className="fas fa-rupee-sign"></i>
-								{value.totalAmt}
+								{value.totalAmt + petValue.totalAmt}
 							</h4>
 						</div>
 					</div>
