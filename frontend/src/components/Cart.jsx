@@ -1,12 +1,14 @@
 import axios, { AxiosError } from "axios";
-import React, { useContext } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import styled from "styled-components";
+import { Link, useHistory } from "react-router-dom";
 import { order } from "../providers/order.provider";
 import { product } from "../providers/product.provider";
 import auth from "../utils/auth";
 import { showToast } from "../utils/toasts";
 import CartList from "./CartList";
 import DetailButton from "./DetailButton";
+import StripeCheckout from "react-stripe-checkout";
 
 const Cart = (props) => {
   const value = useContext(product);
@@ -57,12 +59,20 @@ const Cart = (props) => {
       history.replace("/products");
     } catch (err) {
       if (err instanceof AxiosError) {
-        console.log(err.response.data.message);
+        showToast("Please Login To Place Order", "error");
       } else {
         console.log(err);
       }
     }
   };
+
+  const Button = styled.button`
+    width: 100%;
+    padding: 10px;
+    background-color: black;
+    color: white;
+    font-weight: 600;
+  `;
 
   if (value.cart.length === 0) {
     return (
@@ -183,12 +193,14 @@ const Cart = (props) => {
                   btnClass="btn-outline-warning detailBtn"
                 />
               </div>
-              <div onClick={handleOrder} style={{ display: "inline-block" }}>
+
+              <Link to="/stripecontainer">
                 <DetailButton
                   btnTxt="Confirm Order"
                   btnClass="btn-outline-success detailBtn"
                 />
-              </div>
+              </Link>
+
               <h4 style={{ display: "inline-block", margin: "auto 10px" }}>
                 <b>Total: </b> <i className="fas fa-rupee-sign"></i>
                 {value.totalAmt}
