@@ -1,7 +1,15 @@
 import React from "react";
 import "./CheckoutProduct.css";
 
-function CheckoutProduct({ id, image, title, price, quantity }) {
+function CheckoutProduct({
+	id,
+	image,
+	title,
+	price,
+	quantity,
+	description,
+	breed,
+}) {
 	return (
 		<div className="checkoutProduct">
 			<img
@@ -11,6 +19,8 @@ function CheckoutProduct({ id, image, title, price, quantity }) {
 
 			<div className="checkoutProduct__info">
 				<p className="checkoutProduct__title">{title}</p>
+				<p>{description}</p>
+				<p>{breed || ""}</p>
 				<p className="checkoutProduct__price">
 					<small>₹</small>
 					<strong>{price}</strong>

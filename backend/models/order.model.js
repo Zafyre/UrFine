@@ -18,6 +18,13 @@ const orderSchema = mongoose.Schema(
 			},
 		],
 
+		pets: [
+			{
+				type: mongoose.Types.ObjectId,
+				ref: "Pet",
+			},
+		],
+
 		totalPrice: {
 			type: Number,
 			required: true,

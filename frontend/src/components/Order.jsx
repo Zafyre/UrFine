@@ -12,6 +12,8 @@ function Order(props) {
 	const value = useContext(order);
 	const content = props.order || value.getOrder(id);
 
+	console.log(content.pets);
+
 	return (
 		<div className="order">
 			<h2>Order</h2>
@@ -23,6 +25,7 @@ function Order(props) {
 			<p className="order__id">
 				<small>{order._id}</small>
 			</p>
+			<h4>Products</h4>
 			{content.products.map(({ product, quantity }) => (
 				<CheckoutProduct
 					key={product._id}
@@ -31,6 +34,19 @@ function Order(props) {
 					image={product.image}
 					price={product.price}
 					quantity={quantity}
+					description={product.description}
+				/>
+			))}
+			<h4>Pets</h4>
+			{content.pets.map((pet) => (
+				<CheckoutProduct
+					key={pet._id}
+					id={pet._id}
+					title={pet.name}
+					image={pet.image}
+					price={pet.price}
+					description={pet.description}
+					breed={pet.breed}
 				/>
 			))}
 			<CurrencyFormat

@@ -3,6 +3,7 @@ import axios, { AxiosError } from "axios";
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { order } from "../providers/order.provider";
+import { pet } from "../providers/pet.provider";
 import { product } from "../providers/product.provider";
 import auth from "../utils/auth";
 import { showToast } from "../utils/toasts";
@@ -33,6 +34,7 @@ export default function PaymentForm() {
 	const elements = useElements();
 
 	const value = useContext(product);
+	const petValue = useContext(pet);
 	const orderValue = useContext(order);
 
 	const history = useHistory();
@@ -47,7 +49,8 @@ export default function PaymentForm() {
 					products: value.cart.map((item) => {
 						return { product: item._id, quantity: item.count };
 					}),
-					totalPrice: value.totalAmt,
+					pets: petValue.cart.map((item) => item._id),
+					totalPrice: value.totalAmt + petValue.totalAmt,
 				},
 				{
 					headers: {
@@ -58,9 +61,10 @@ export default function PaymentForm() {
 
 			console.log(response.data);
 
-			showToast("Order Cnfirmed", "success");
+			showToast("Order Confirmed", "success");
 
 			value.clearCart();
+			petValue.clearCart();
 			orderValue.addOrder(response.data.order);
 
 			history.replace("/products");
@@ -84,7 +88,7 @@ export default function PaymentForm() {
 			try {
 				const { id } = paymentMethod;
 				const response = await axios.post("http://localhost:4000/api/payment", {
-					amount: value.totalAmt * 100,
+					amount: value.totalAmt * 100 + petValue.totalAmt * 100,
 					id,
 				});
 
