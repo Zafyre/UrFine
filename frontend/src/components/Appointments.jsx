@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Redirect, Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import { appointment } from "../providers/appointment.provider";
 
 const Appointments = () => {
@@ -10,19 +10,21 @@ const Appointments = () => {
 
   if (content.length === 0) {
     appointments = (
-      <h4>
-        You do not have any appointment.
-        <li style={{ margin: "5px" }}>
-          <Link to="/newAppointment">
-            <button className="btn">
-              <span className="mr-2">
-                <i className="fas fa-calender" />
-              </span>
-              Get an Appointment
-            </button>
-          </Link>
-        </li>
-      </h4>
+      <center>
+        <h4>
+          You do not have any appointment.
+          <li style={{ margin: "5px" }}>
+            <Link to="/newAppointment">
+              <button className="btn">
+                <span className="mr-2">
+                  <i className="fas fa-calender" />
+                </span>
+                Get an Appointment
+              </button>
+            </Link>
+          </li>
+        </h4>
+      </center>
     );
   } else {
     appointments =

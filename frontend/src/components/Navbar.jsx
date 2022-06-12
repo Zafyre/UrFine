@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import auth from "../utils/auth";
 
-const Navbar = (props) => {
+const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-md navbar-dark">
       <Link to="/" className="navbar-brand">
@@ -59,6 +59,16 @@ const Navbar = (props) => {
                       <i className="fas fa-calendar " />
                     </span>
                     My Appointments
+                  </button>
+                </Link>
+              </li>
+              <li style={{ margin: "5px" }}>
+                <Link to="/adminpage">
+                  <button className="btn">
+                    <span className="mr-2">
+                      <i class="fa fa-user" aria-hidden="true"></i>
+                    </span>
+                    Admin Page
                   </button>
                 </Link>
               </li>
